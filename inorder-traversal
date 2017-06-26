@@ -28,7 +28,7 @@ public class Solution {
             }  
             if (!stack.isEmpty()) {  
                 root = stack.pop();  
-                result.add(root.val);    
+                list.add(root.val);    
                 root = root.right;  
             }  
         } while(!stack.isEmpty() || root != null);  
