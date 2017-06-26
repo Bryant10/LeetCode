@@ -1,3 +1,7 @@
+//主要思想：广度优先搜索。先构造一个字符串队列，并将start加入队列。1.对队列头字符串做单个字符替换
+//每次替换后，2.判断是否和end匹配，如果匹配，返回答案；3.没有匹配，则在字典里面查询是否有“邻居字符串”,
+//如果有，则将该字符串加入队列，同时将该字符串从字典里删除。重复1的过程，知道和end匹配。如果最后队列
+//为空还未匹配到，则返回0.
 import java.util.*;
 public class Solution {
     public int ladderLength(String start, String end, HashSet<String> dict) {
