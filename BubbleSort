@@ -1,13 +1,13 @@
 /**
  * Created by Bryant on 2017/6/9.
  */
-public class BubbleSort {
-    public static void bubbleSort (int[] a) {
-        int temp=0;
+public class bubbleSort {
+    //将最大值依次沉入数组最后面
+    public static void BubbleSort1 (int[] a) {
         for (int i = 0; i <a.length-1 ; i++) {
             for (int j = 0; j <a.length-1-i ; j++) {
                 if (a[j]>a[j+1]){
-                    temp=a[j];
+                    int temp=a[j];
                     a[j]=a[j+1];
                     a[j+1]=temp;
                 }
@@ -17,9 +17,42 @@ public class BubbleSort {
             System.out.print(a[i]+" ");
         }
     }
-
+    //将最小值依次冒泡到数组最前面
+    public static void BubbleSort2(int[] a) {
+        for (int i = 0; i <a.length-1 ; i++) {
+            for (int j = a.length-2; j >=i ; j--) {
+                if (a[j]>a[j+1]){
+                    int temp=a[j];
+                    a[j]=a[j+1];
+                    a[j+1]=temp;
+                }
+            }
+        }
+        for (int i = 0; i <a.length ; i++) {
+            System.out.print(a[i]+" ");
+        }
+    }
+    //冒泡排序改进 加入flag,已经有序无须再进行循环判断
+    public static void BubbleSort3(int[] a) {
+        boolean flag=true;
+        for (int i = 0; i <a.length-1 && flag ; i++) {
+            flag=false;
+            for (int j = a.length-2; j >=i ; j--) {
+                if (a[j]>a[j+1]){
+                    int temp=a[j];
+                    a[j]=a[j+1];
+                    a[j+1]=temp;
+                    flag=true;
+                }
+            }
+        }
+        for (int i = 0; i <a.length ; i++) {
+            System.out.print(a[i]+" ");
+        }
+    }
     public static void main(String[] args) {
-        int[] a={12,1,18,152,4,24,23,26,4};
-        BubbleSort(a);
+        int[] a={12,1,18,152,4,24,23,26,4,29,8,5,7};
+        BubbleSort2(a);
     }
 }
+
