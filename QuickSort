@@ -1,0 +1,41 @@
+/**
+ * Created by Bryant on 2017/6/27.
+ */
+public class quickSort {
+    public static void main(String[] args) {
+        int[] arr={50,10,90,30,70,40,80,60,20};
+        QuickSort(arr,0,arr.length-1);
+        for (int i = 0; i <arr.length ; i++) {
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+    }
+    public static void QuickSort(int[] arr,int low,int high){
+        int pivot;
+        if (low<high){
+            pivot=Partition(arr,low,high);
+            QuickSort(arr,low,pivot-1);
+            QuickSort(arr,pivot+1,high);
+        }
+
+    }
+    public static int Partition(int[] arr,int low,int high) {
+        int pivotkey=arr[low];
+        while (low<high) {
+            //从右到左找一个比key小的数，将其交换到key的左边
+            while (low<high && arr[high]>=pivotkey)
+                high--;
+            swap(arr,low,high);
+            //从左到右找一个比key大的数，将其交换到key的右边
+            while (low<high && arr[low]<=pivotkey)
+                low++;
+            swap(arr,low,high);
+        }
+        return low;
+    }
+    public static void swap(int[] arr,int low,int high) {
+        int temp=arr[low];
+        arr[low]=arr[high];
+        arr[high]=temp;
+    }
+}
