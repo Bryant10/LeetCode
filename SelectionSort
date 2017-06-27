@@ -1,0 +1,30 @@
+/**
+ * Created by Bryant on 2017/6/9.
+ */
+public class SelectionSort {
+    public static void SelectionSort(int[] a){
+        int min;
+        for (int i = 0; i <a.length-1 ; i++) {
+            //将当前下标作为本趟排序的最小值下标
+            min=i;
+            for (int j = i+1; j <a.length ; j++) {
+                if (a[j] < a[min]) {
+                    //将此关键字的下标赋值给min
+                    min = j;
+                }
+            }
+            if(min!=i){
+                int temp=a[i];
+                a[i]=a[min];
+                a[min]=temp;
+            }
+
+        }
+        for (int i = 0; i < a.length; i++)
+            System.out.print(a[i] + " ");
+    }
+    public static void main(String[] args) {
+        int[] a={12,1,18,152,4,24,23,26,4,151,9,5,7,8,2};
+        SelectionSort(a);
+    }
+}
