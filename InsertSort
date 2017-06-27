@@ -1,0 +1,28 @@
+/**
+ * Created by Bryant on 2017/6/9.
+ */
+public class InsertSort {
+    public static void InsertSort(int[] a) {
+        for (int i = 1; i <a.length ; i++) {
+            //当前要插入的元素作为哨兵
+            int temp=a[i];
+            从第2个元素开始进行排序
+            int j = i;
+            //当temp一直小于前面的元素时，将元素向后移动。
+            //并且temp>=a[j-1]时跳出循环，此时的下标j为要插入的位置
+            for (; j>0 && temp<a[j-1] ; j--) {
+                a[j]=a[j-1];
+            }
+            //在位置j插入要插入的元素
+            a[j]=temp;
+        }
+        for (int i = 0; i <a.length ; i++) {
+            System.out.print(a[i]+ " ");
+        }
+    }
+    public static void main(String[] args) {
+        int[] a={12,1,18,152,4,24,23,26,4,8,5,7,3,2,151};
+        InsertSort(a);
+    }
+}
+
