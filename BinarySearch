@@ -1,0 +1,134 @@
+/**
+ * Created by Bryant on 2017/6/28.
+ */
+public class BinarySearch {
+    public static void main(String[] args) {
+        int[] arr={0,1,2,3,4,5,6,7};
+        int index=BinarySearch(arr,3);
+        System.out.println(index);
+    }
+    //给定一个有序的数组，查找 value 是否在数组中，不存在返回 - 1
+    public static int BinarySearch(int[] arr,int key) {
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){//循环条件，适时而变
+            int mid=(left+right)/2;
+            //防止溢出，移位也更高效。同时，每次循环都需要更新。
+            //int mid = left + ((right - left) >> 1);
+            if (arr[mid]<key){
+                left=mid+1;
+            }
+            else if (arr[mid]>key){
+                right=mid-1;//right赋值，适时而变
+            }
+            else {
+                return mid;
+            }
+            //可能会有读者认为刚开始时就要判断相等，但毕竟数组中不相等的情况更多
+            //如果每次循环都判断一下是否相等，将耗费时间
+        }
+        return -1;
+    }
+
+    //给定一个有序的数组，查找 value 第一次出现的下标，不存在返回 - 1
+    public static int BinarySearch1(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right - left) >> 1);
+            if (arr[mid]>=key){//因为是找到最小的等值下标，所以等于号放在这里
+                //出现多个目标值时right左移
+                right=mid-1;
+            }
+            else {
+                //mid小于key，left左移，right不动
+                left=mid+1;
+            }
+        }
+        return arr[right+1]==key? right+1:-1;
+        //return arr[left]==key? left:-1;
+    }
+    //给定一个有序的数组，查找 value 最后一次出现的下标，不存在返回 - 1
+    public static int BinarySearch2(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right - left) >> 1);
+            if (arr[mid]<=key){//因为是找到最大的等值下标，所以等于号放在这里
+                left=mid+1;
+            }
+            else {
+                right=mid-1;
+            }
+        }
+        return arr[left-1]==key? left-1:-1;
+        //return arr[right]==key? right:-1;
+    }
+    //给定一个有序的数组，查找最接近 value 且大于 value 的数的下标（如果该数存在多个，返回第一个下标），不存在返回 - 1
+    public static int BinarySearch3(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right-left)>>1);
+            if (arr[mid]>key){
+                right=mid-1;
+            }
+            else {
+                left=mid+1;
+            }
+        }
+        return arr[right+1]>key? right+1:-1;
+        //return arr[left]>key? left:-1;
+    }
+    //给定一个有序的数组，查找最接近 value 且小于 value 的数的下标（如果该数存在多个，返回第一个下标），不存在返回 - 1
+    public static int BinarySearch4(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right-left)>>1);
+            if (arr[mid]>=key){
+                right=mid-1;
+            }
+            else {
+                left=mid+1;
+            }
+        }
+        return arr[left-1] < key ? left - 1 : -1;
+        //return arr[right]  < key ? right :-1;
+    }
+    //给定一个轮转后的有序数组（所谓转轮有序数组，比如：{2, 3, 4, 5, 1}，{ 5, 1, 2, 3, 4 }），查找 value 是否在数组中，不存在返回 - 1
+    public static int BinarySearch5(int arr[], int key)
+    {
+        int left = 0;
+        int right = arr.length-1;
+        while (left <= right)
+        {
+            int mid = left + ((right - left) >> 1);
+            if (key < arr[mid])
+            {
+                if (arr[mid] < arr[right])
+                    right=mid-1;
+                else {
+                    if (key<arr[left])
+                        left=mid+1;
+                    else
+                        right=mid-1;
+                }
+            }
+            else if (key > arr[mid])
+            {
+                if (arr[mid]>arr[left])
+                    left=mid+1;
+                else {
+                    if (key>arr[right])
+                        right=mid-1;
+                    else
+                        left=mid+1;
+                }
+            }
+            else
+                return mid;
+        }
+        return -1;
+    }
+}
