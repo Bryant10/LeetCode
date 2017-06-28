@@ -1,6 +1,9 @@
 /**
  * Created by Bryant on 2017/6/28.
  */
+//首先判断出是返回left，还是返回right 最后一个返回right 第一个返回left
+//判断出比较符号,就是这里的 if (array[mid] ? key) 中的判断符号,如果查找最后小于或者等于key的元素，则应该使用判断符号>,当mid>key时,right=mid-1
+//如果查找第一个大于或者等于key的元素，应该使用判断符号<,当mid<key时，left=mid+1.
 public class BinarySearch {
     public static void main(String[] args) {
         int[] arr={0,1,2,3,4,5,6,7};
@@ -48,6 +51,22 @@ public class BinarySearch {
         return arr[right+1]==key? right+1:-1;
         //return arr[left]==key? left:-1;
     }
+    public static int BinarySearch11(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right - left) >> 1);
+            if(arr[mid]>=key){
+                right=mid-1;
+            }
+            else {
+                left=mid+1;
+            }
+        }
+        if (left<arr.length && arr[left]==key)
+            return left;
+        return -1;
+    }
     //给定一个有序的数组，查找 value 最后一次出现的下标，不存在返回 - 1
     public static int BinarySearch2(int[] arr,int key){
         int left=0;
@@ -63,6 +82,22 @@ public class BinarySearch {
         }
         return arr[left-1]==key? left-1:-1;
         //return arr[right]==key? right:-1;
+    }
+    public static int BinarySearch22(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right - left) >> 1);
+            if (arr[mid]<=key){
+                left=mid+1;
+            }
+            else {
+                right=mid-1;
+            }
+        }
+        if (right>=0 && arr[right]==key)
+            return right;
+        return -1;
     }
     //给定一个有序的数组，查找最接近 value 且大于 value 的数的下标（如果该数存在多个，返回第一个下标），不存在返回 - 1
     public static int BinarySearch3(int[] arr,int key){
@@ -80,6 +115,40 @@ public class BinarySearch {
         return arr[right+1]>key? right+1:-1;
         //return arr[left]>key? left:-1;
     }
+    public static int BinarySearch31(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right-left)>>1);
+            if (arr[mid]<=key){
+                left=mid+1;
+            }
+            else {
+                right=mid-1;
+            }
+        }
+        if (left< arr.length && arr[left]>key)
+            return left;
+        return -1;
+    }
+    //查找第一个等于或者大于key的元素
+    //也就是说等于查找key值的元素有好多个，返回这些元素最左边的元素下标；如果没有等于key值的元素，则返回大于key的最左边元素下标。
+    public static int BinarySearch32(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right-left)>>1);
+            if (arr[mid]>=key){
+                right=mid-1;
+            }
+            else {
+                left=mid+1;
+            }
+        }
+        if (left< arr.length && arr[left]>=key)
+            return left;
+        return -1;
+    }
     //给定一个有序的数组，查找最接近 value 且小于 value 的数的下标（如果该数存在多个，返回第一个下标），不存在返回 - 1
     public static int BinarySearch4(int[] arr,int key){
         int left=0;
@@ -95,6 +164,40 @@ public class BinarySearch {
         }
         return arr[left-1] < key ? left - 1 : -1;
         //return arr[right]  < key ? right :-1;
+    }
+    public static int BinarySearch41(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right-left)>>1);
+            if (arr[mid]>=key){
+                right=mid-1;
+            }
+            else {
+                left=mid+1;
+            }
+        }
+        if (right>=0 && arr[right]<key)
+            return right;
+        return -1;
+    }
+    //查找最后一个等于或者小于key的元素
+    //也就是说等于查找key值的元素有好多个，返回这些元素最右边的元素下标；如果没有等于key值的元素，则返回小于key的最右边元素下标
+    public static int BinarySearch42(int[] arr,int key){
+        int left=0;
+        int right=arr.length-1;
+        while (left<=right){
+            int mid = left + ((right-left)>>1);
+            if (arr[mid]>key){
+                right=mid-1;
+            }
+            else {
+                left=mid+1;
+            }
+        }
+        if (right>=0 && arr[right]<=key)
+            return right;
+        return -1;
     }
     //给定一个轮转后的有序数组（所谓转轮有序数组，比如：{2, 3, 4, 5, 1}，{ 5, 1, 2, 3, 4 }），查找 value 是否在数组中，不存在返回 - 1
     public static int BinarySearch5(int arr[], int key)
