@@ -4,6 +4,14 @@
 //首先判断出是返回left，还是返回right 最后一个返回right 第一个返回left
 //判断出比较符号,就是这里的 if (array[mid] ? key) 中的判断符号,如果查找最后小于或者等于key的元素，则应该使用判断符号>,当mid>key时,right=mid-1
 //如果查找第一个大于或者等于key的元素，应该使用判断符号<,当mid<key时，left=mid+1.
+
+
+//查找第一个与key相等的元素(arr[mid]<key left = mid + 1) 返回left
+//查找最后一个与key相等的元素(arr[mid]>key right = mid - 1) 返回right
+//查找最后一个等于或者小于key的元素(arr[mid]>key right = mid - 1;) 返回right
+//查找最后一个小于key的元素(arr[mid]>=key right = mid - 1) 返回right
+//查找第一个等于或者大于key的元素(arr[mid]<key left = mid + 1) 返回left
+//查找第一个大于key的元素(arr[mid]<=key left = mid + 1) 返回left
 public class BinarySearch {
     public static void main(String[] args) {
         int[] arr={0,1,2,3,4,5,6,7};
