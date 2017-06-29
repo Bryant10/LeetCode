@@ -1,0 +1,50 @@
+/**
+ * Created by Bryant on 2017/6/27.
+ */
+public class HeapSort {
+    public static void main(String[] args) {
+        int[] a={90,70,80,60,10,40,50,30,20,11,2,3,5,8,1,100,33,24,42,9};
+        HeapSort(a);
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i]+ " ");
+        }
+    }
+
+    public static void HeapSort(int[] a) {
+        int i;
+        //从最后一个节点array.length-1的父节点（array.length-1-1）/2开始，直到根节点0，反复调整堆
+        for (i = (a.length-2)/2; i >=0 ; i--) {
+            HeapAdjust(a, i,a.length-1);
+        }
+        //交换n-1次，得到堆排序结果
+        for (i = a.length-1; i > 0 ; i--) {
+            //将堆顶元素和堆低元素交换，即得到当前最大元素正确的排序位置
+            int temp=a[0];
+            a[0]=a[i];
+            a[i]=temp;
+            //整理，将剩余的元素整理成最大堆
+            HeapAdjust(a,0,i-1);
+        }
+
+    }
+    //将元素array[k]自下往上,从左到右逐步调整树形结构
+    public static void HeapAdjust(int[] a,int start,int end) {
+        int temp,j;
+        temp=a[start];
+        //i为初始化为节点k的左孩子，沿节点较大的子节点向下调整
+        for (j = 2*start+1; j <=end ; j=2*j+1) {
+            //如果节点的右孩子>左孩子，则取右孩子节点的下标
+            if (j<end && a[j]<a[j+1])
+                ++j;
+            //根节点 >=左右子女中关键字较大者，调整结束
+            if (temp>=a[j])
+                break;
+            //将左右子结点中较大值array[i]调整到双亲节点上
+            a[start]=a[j];
+            //修改start值，以便继续向下调整
+            start=j;
+        }
+        //被调整的结点的值放人最终位置
+        a[start]=temp;
+    }
+}
