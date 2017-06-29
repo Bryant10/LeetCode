@@ -1,0 +1,30 @@
+/**
+ * Created by Bryant on 2017/6/29.
+ */
+public class ShellSort {
+    public static void main(String[] args) {
+        int a[]={9,1,5,8,3,7,4,6,2,10,13,12,11};
+        ShellSort(a);
+        for (int i = 0; i < a.length ; i++) {
+            System.out.print(a[i]+" ");
+        }
+        System.out.println();
+    }
+
+    public static void ShellSort(int[] a) {
+        int i,j;
+        int increment=a.length;
+        do {
+            increment=increment/3+1;
+            for ( i = increment; i < a.length ; i++) {
+                if (a[i]<a[i-increment]){
+                    int temp=a[i];
+                    for ( j = i-increment; j >=0 && temp<a[j] ; j-=increment) {
+                        a[j+increment]=a[j];
+                    }
+                    a[j+increment]=temp;
+                }
+            }
+        }while (increment>1);
+    }
+}
